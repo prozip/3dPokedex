@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="title" content="Pokedex 3D" />
+	<meta name="description" content="3D-Animated Pokedex" />
+	<meta name="robots" content="index, follow" />
+	<meta name="language" content="English" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title> details </title>
+	<meta name="msapplication-TileColor" content="#da532c" />
+	<meta name="theme-color" content="#ffffff" />
+	<!-- 🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈 STYLES -->
+	<link rel="stylesheet" href="assets/css/plugins/remixicon.css" />
+	<link rel="stylesheet" href="assets/css/plugins/bootstrap.min.css" />
+	<link rel="stylesheet" href="assets/css/plugins/swiper-bundle.min.css" />
+	<link rel="stylesheet" href="assets/css/style.css" />
+	<link rel="stylesheet" href="assets/css/model_style.css" />
+	<link href="http://fonts.cdnfonts.com/css/pokemon-solid" rel="stylesheet">
+</head>
+
+<body class="body" oncontextmenu="return false;">
+	<div class="overflow-hidden">
+		<!-- ====== header -->
+		<header class="header__1 js-header">
+			<div class="container">
+				<div class="wrapper js-header-wrapper space-x-10">
+					<div class="header__logo">
+						<a href="/">
+							<img class="header__logo" id="logo_js" src="assets/img/logos/logo.png" alt="logo" />
+						</a>
+					</div>
+					<!-- ==================  -->
+					<div class="header__menu">
+						<ul class="d-flex space-x-20">
+							<li> <a class="color_black" href="/"> Pokedex</a> </li>
+							<li> <a class="color_black" href="gigantamax.html"> Gigantamax</a> </li>
+							<li> <a class="color_black" href="mega-evo.html"> Mega Evo</a> </li>
+							<li> <a class="color_black" href=""> Blog</a> </li>
+						</ul>
+					</div>
+					<!-- ================== -->
+					<div class="header__search">
+						<form onsubmit="search(event, document.getElementById('search_input').value)">
+							<input type="text" placeholder="Search name/id" id="search_input"/>
+							<button class="header__result">
+								<i class="ri-search-line"></i>
+							</button>
+						</form>
+					</div>
+					<div class="d-flex align-items-center space-x-20">
+						<div class="header__avatar">
+							<div class="price">
+								<span>??? <strong>Pokemons</strong> </span>
+							</div>
+							<img class="avatar" src="assets/img/logos/pokeball-icon.png" alt="avatar" />
+						</div>
+						<div class="mode_switcher space-x-10">
+							<a href="#" class="light d-flex align-items-center is_active">
+								<i class="ri-sun-fill"></i> Light
+							</a>
+							<div class="bg-dark py-10" style="padding: 0px 0px; border-radius: 20px;">
+								<a href="#" class="dark d-flex align-items-center">
+									<i class="ri-moon-fill"></i> Dark
+								</a>
+							</div>
+						</div>
+						<div class="header__burger js-header-burger"></div>
+					</div>
+					<div class="header__mobile js-header-mobile">
+						<div class="header__mobile__menu space-y-40">
+							<ul class="d-flex space-y-20">
+								<li> <a class="color_black" href="/"> Pokedex</a> </li>
+								<li> <a class="color_black" href="gigatamax.html"> Gigantamax</a> </li>
+								<li> <a class="color_black" href="meta-evo.html"> Mega Evo</a> </li>
+								<li> <a class="color_black" href=""> Blog</a> </li>
+
+							</ul>
+							<div class="space-y-20">
+								<div class="header__search in_mobile w-full">
+									<form onsubmit="search(event, document.getElementById('search_input_mobile').value)">
+										<input type="text" placeholder="Search name/id" id="search_input_mobile" />
+										<button class="header__result">
+											<i class="ri-search-line"></i>
+										</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		<div class="modal fade popup" id="popup_bid" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+				<div class="modal-content">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<div class="modal-body space-y-20 p-20" id="canvas-wrapper">
+						<h3 style="text-align: center; margin-top: 15px;padding-bottom: 15px;">Who's that Pokemon
+							Creator
+						</h3>
+						<canvas id="canvas" width="100%"></canvas>
+						<canvas id="cloneCanvas" style="display: none;"></canvas>
+					</div>
+					<div class="modal-footer">
+						<div class="mr-auto">
+							<button type="button" class="btn btn-light" onclick="changeScale('reset')">
+								Reset Size
+							</button>
+							<button type="button" class="btn btn-primary" onclick="changeScale('add')">
+								<i class="ri-add-line"></i>
+							</button>
+							<button type="button" class="btn btn-primary" onclick="changeScale('minus')">
+								<i class="ri-subtract-line"></i>
+							</button>
+						</div>
+						<button type="button" class="btn btn-dark" onclick="swap('hide')">Hide</button>
+						<button type="button" class="btn btn-dark" onclick="swap('show')">Show</button>
+						<button type="button" class="btn btn-primary" onclick="download()">Save</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade popup" id="popup_buy" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<div class="modal-body space-y-20 p-40">
+						<h3> Quick Tutorials
+						</h3>
+						<p> 1. Rotate model: Left Mouse/Touch Drag<br>
+							2. Move(Pan) model: Right Mouse/2-finger Touch Drag<br>
+							3. Zoom model: Mouse Scroll/Touch pinch
+						</p>
+						<!-- <a href="" class="btn btn-primary
+			                    w-full" aria-label="Close" data-dismiss="modal">
+							Ok!!!</a> -->
+						<div class="col text-center">
+							<div class="col-sm-4 float-right">
+								<a href="" onclick="notShow()" class="btn btn-secondary" aria-label="Close" data-dismiss="modal">
+									Don't show</a>
+							</div>
+							<div class="col-sm-4 float-right">
+								<a href="" class="btn btn-primary" aria-label="Close" data-dismiss="modal">
+									Okie :: <i class="ri-bear-smile-line"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade popup" id="popup-error" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<div class="modal-body space-y-20 p-40">
+						<h3>This Poke-Model is not available
+						</h3>
+						<p>I will update it later :(
+						</p>
+						<div class="col text-center">
+							<div class="col-sm-2 float-right">
+								<a href="" class="btn btn-secondary" aria-label="Close" data-dismiss="modal">
+									Close</a>
+							</div>
+							<div class="col-sm-6 float-right">
+								<a href="/" class="btn btn-primary">
+									Check available</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade popup" id="popup-fetch-error" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<div class="modal-body space-y-20 p-40">
+						<h3 class="text-center">Not found</h3>
+						<p class="text-center">Search string <span class="color_text txt
+			                        _bold">must </span> match exactly.<br>
+									Ex: pikachu, Pikachu, 25, 025 ...</p>
+
+						<a class="btn btn-dark w-full" aria-label="Close" data-dismiss="modal">Close</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade popup" id="popup_report" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<div class="modal-body space-y-20 p-40">
+
+						<h3>Report this item</h3>
+						<div class="hr"></div>
+						<div class="form-group space-y-10">
+							<span class="variationInput">reason:</span>
+							<select class="form-select custom-select" aria-label="Default select example">
+								<option> Select a reason</option>
+								<option>Purchase</option>
+								<option>Support</option>
+								<option>Technique</option>
+								<option>Service Request</option>
+							</select>
+						</div>
+						<div class="form-group space-y-10">
+							<span class="variationInput">Additional comments:</span>
+							<textarea name="..." cols="30" rows="10"
+								placeholder="Explain why you are concerned about it."></textarea>
+						</div>
+						<a href="" class="btn btn-dark"> Report</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="container">
+			<a href="/" class="btn btn-white btn-sm my-40">
+				Back to home
+			</a>
+			<a class="btn btn-white btn-sm my-40 float-right ml-2" id="next">
+				Next
+			</a>
+			<a class="btn btn-white btn-sm my-40 float-right" id="prev">
+				Prev
+			</a>
+			<div class="item_details">
+				<div class="row sm:space-y-20">
+					<div class="col-lg-6">
+						<!-- <img class="item_img" src="assets/img/items/item_2.png" alt=""> -->
+						<model-viewer bounds="tight" src="002.glb" ar ar-modes="webxr scene-viewer quick-look"
+							camera-controls environment-image="neutral" poster="assets/img/poke/model/pokeball.png"
+							shadow-intensity="1" autoplay max-field-of-view='110deg' 
+							camera-target="auto auto auto">
+							<div class="progress-bar-model hide" slot="progress-bar">
+								<div class="update-bar-model"></div>
+							</div>
+							<button slot="ar-button" id="ar-button">
+								View in your space
+							</button>
+							<div id="ar-prompt">
+								<img src="assets/img/poke/model/ar_hand_prompt.png">
+							</div>
+							<div class="controls" style="margin-top: 10px; margin-left: 10px;">
+								<div>
+								  <p>Metalness: <span id="metalness-value"></span></p>
+								  <input id="metalness" type="range" min="0" max="1" step="0.01" value="0.9">
+								</div>
+								<div>
+								  <p>Roughness: <span id="roughness-value"></span></p>
+								  <input id="roughness" type="range" min="0" max="1" step="0.01" value="0.6">
+								</div>
+							  </div>
+						</model-viewer>
+					</div>
+					<div class="col-lg-6">
+						<div class="space-y-20">
+							<h2 class="first-uppercase" id="poke_name">Loading... </h2>
+							<div class="d-flex justify-content-between">
+								<div class="space-x-10 d-flex align-items-center" id="poke-type">
+									<!-- <p>№ #002</p> -->
+									<!-- <a href="#" class="likes space-x-3 poke">
+										<img class="poke-icon grass" src="assets/img/poke/type_icon/grass.svg">
+										<span class="txt_sm">Grass</span>
+									</a>
+									<a href="#" class="likes space-x-3 poke">
+										<img class="poke-icon poison" src="assets/img/poke/type_icon/poison.svg">
+										<span class="txt_sm">Poison</span>
+									</a> -->
+								</div>
+								<div class="space-x-10 d-flex align-items-center">
+									<!-- <div class="share">
+										<div class="icon">
+											<a href="#"> <i class="ri-share-line"></i>
+											</a>
+										</div>
+										<div class="dropdown__popup">
+											<ul class="space-y-10">
+												<li> <a href=""> <i class="ri-facebook-line"></i>
+													</a>
+												</li>
+												<li> <a href=""> <i class="ri-messenger-line"></i>
+													</a>
+												</li>
+												<li> <a href=""> <i class="ri-whatsapp-line"></i>
+													</a>
+												</li>
+												<li>
+													<a href="#" class="space-x-10
+															d-flex" data-toggle="modal" data-target="#popup_report">
+														<i class="ri-flag-line"></i>
+														<span> Report
+														</span>
+													</a>
+												</li>
+											</ul>
+										</div>
+									</div> -->
+									<div class="more">
+										<div class="icon">
+											<a style="cursor: pointer;"> <i class="ri-more-fill"></i>
+											</a>
+										</div>
+										<div class="dropdown__popup">
+											<ul class="space-y-10">
+												<li>
+													<a style="cursor: pointer;" class="space-x-10 d-flex">
+														<i class="ri-star-line"></i>
+														<span> ShinyVersion
+														</span>
+													</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="box">
+								<div class="space-y-20">
+									<div class="d-flex justify-content-between
+											mb-30_reset">
+										<ul class="nav nav-tabs d-flex space-x-10 mb-30" role="tablist">
+											<li class="nav-item">
+												<a class="btn btn-white btn-sm active" data-toggle="tab" href="#tabs-1"
+													role="tab">
+													Summary</a>
+											</li>
+											<li class="nav-item">
+												<a class="btn btn-white btn-sm" data-toggle="tab" href="#tabs-2"
+													role="tab">
+													Animation</a>
+											</li>
+										</ul>
+										<!-- Tab panes -->
+										<div class="dropdown d-none d-sm-block">
+											<button class="btn btn-white btn-sm
+													dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												More Info
+											</button>
+											<div class="dropdown-menu">
+												<a style="cursor: pointer;" class="dropdown-item" target="_blank"
+													id="offical-pokedex">pokemon.com</a>
+											</div>
+										</div>
+									</div>
+									<div class="hr"></div>
+									<div class="tab-content">
+										<div class="tab-pane p-3" id="tabs-2" role="tabpanel">
+											<h4 style="margin-left: 5px;">Animation</h4>
+											<br>
+											<select class="form-select form-select-sm rounded-pill"
+												aria-label=".form-select-sm example" id="ani_select">
+												<option value="0" selected disabled>Select Animation</option>
+											</select>
+											<div style="margin-top: 20px; margin-bottom: 20px; height: 30px;">
+												<input style="width: 40%; padding-top: 20px; margin-left: 5px;"
+													type="range" class="form-range float-left rounded-pill"
+													id="ani_range" step="0.01">
+												<button type="button"  onclick="changeAni(1)"  class="btn btn-primary float-right px-3">
+													<i class="ri-skip-forward-fill"></i>
+												</button>
+												<button onclick="changePlaying()" type="button"
+													class="btn btn-primary float-right px-3" style="margin-right: 10px;">
+													<i class="ri-play-fill" style="display: none"></i>
+													<i class="ri-pause-fill"></i>
+												</button>
+												<button type="button" onclick="changeAni(-1)" class="btn btn-primary float-right px-3"
+													style="margin-right: 10px;">
+													<i class="ri-skip-back-fill"></i>
+												</button>
+											</div>
+										</div>
+										<div class="tab-pane space-y-20 p-3 active" id="tabs-1" role="tabpanel">
+											<h4>Base stats</h4>
+											<div class="progress">
+												<div class="progress-bar bg-success" role="progressbar"
+													style="width: 100%" id="hp">HP</div>
+											</div>
+											<div class="progress">
+												<div class="progress-bar bg-success" role="progressbar"
+													style="width: 100%" id="atk">Attack</div>
+											</div>
+											<div class="progress">
+												<div class="progress-bar bg-success" role="progressbar"
+													style="width: 100%" id="def">Defense</div>
+											</div>
+											<div class="progress">
+												<div class="progress-bar bg-success" role="progressbar"
+													style="width: 100%" id="spatk">Sp. Atk</div>
+											</div>
+											<div class="progress">
+												<div class="progress-bar bg-success" role="progressbar"
+													style="width: 100%" id="spdef">Sp. Def </div>
+											</div>
+											<div class="progress">
+												<div class="progress-bar bg-success" role="progressbar"
+													style="width: 100%" id="spd">Speed</div>
+											</div>
+											<a href="#" class="likes space-x-3 poke stat float-right">
+												<span class="txt_md" id="stat_total">Total: Null</span>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="numbers" style="padding-left: 5px">
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="space-y-5">
+											<p class="color_text">Height</p>
+											<h4 id="poke-height">Null - Null</h4>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="space-y-5">
+											<p class="color_text">Weight</p>
+											<h4 id="poke-weight">Null - Null </h4>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="hr2"></div>
+							<div class="creators">
+								<div class="row">
+									<!-- <div class="col-lg-6">
+										<div class="avatars space-x-5">
+											<div class="media">
+												<a href="Profile.html">
+													<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/2.png"
+														alt="Avatar" class="avatar
+															avatar-sm">
+												</a>
+											</div>
+											<div>
+												<a href="Profile.html">
+													<p class="avatars_name color_black">#001. Bulbasaur</p>
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="avatars space-x-5">
+											<div class="media">
+												<div class="badge">
+													<img class="badge" src="assets/img/icons/Badge.svg" alt="">
+												</div>
+												<a href="Profile.html">
+													<img src="assets/img/avatars/avatar_2.png" alt="Avatar" class="avatar
+															avatar-sm">
+												</a>
+											</div>
+											<div>
+												<a href="Profile.html">
+													<p class="avatars_name color_black">#003 Venusaur</p>
+												</a>
+											</div>
+										</div>
+									</div> -->
+								</div>
+							</div>
+							<div class="d-flex space-x-20">
+								<a href="" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#popup_buy">
+									Model Tutorials </a>
+								<a onclick="run('hide')" class="btn btn-grad btn-lg" data-toggle="modal"
+									data-target="#popup_bid">
+									Who's that Pokemon</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="footer__1">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6 space-y-20">
+						<div class="footer__logo">
+							<a href="/">
+								<img width="45%" src="assets/img/logos/logo.png" alt="logo" id="logo_js_f">
+							</a>
+						</div>
+						<p class="footer__text">
+							3D-Animated Pokédex on the web
+						</p>
+						<div>
+							<ul class="footer__social space-x-10 mb-40">
+								<li> <a href="https://github.com/prozip" target="__blank"> <i class="ri-github-line"></i> </a>
+								</li>
+								<li> <a data-bs-toggle="tooltip" data-bs-placement="top" title="ZeroCracK#3962"> <i
+											class="ri-discord-line"></i> </a>
+								</li>
+								<li> <a  target="__blank"> <i class="ri-whatsapp-line"></i> </a>
+								</li>
+								<li> <a href="https://www.reddit.com/user/prozip_" target="__blank"> <i class="ri-reddit-line" ></i> </a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-2 col-6">
+						<h6 class="footer__title">Pokedex 3D</h6>
+						<ul class="footer__list">
+							<li> <a href="/"> Pokedex </a>
+							</li>
+							<li> <a href="gigantamax.html"> Gigantamax
+								</a> </li>
+							<li> <a href="mega-evo.html"> Mega Evo</a> </li>
+						</ul>
+					</div>
+					<div class="col-lg-2 col-6">
+						<h6 class="footer__title">Credits</h6>
+						<ul class="footer__list">
+							<li> <a href="https://pokeapi.co/" target="__blank"> PokeApi</a>
+							</li>
+							<li> <a href="https://www.blender.org/" target="__blank"> Blender</a>
+							</li>
+							<li> <a href="https://getbootstrap.com/" target="__blank"> Bootstrap</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-lg-2 col-6">
+						<h6 class="footer__title">About me</h6>
+						<ul class="footer__list">
+							<li> <a href="https://github.com/prozip" target="__blank"> Github </a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<p class="copyright text-center">
+					© 2022. Made by prozip. 
+					<img src="assets/img/icons/vietnam-flag-icon.png" width="18px" style="margin-bottom: 4px;">
+
+				</p>
+			</div>
+		</footer>
+	</div>
+	<!-- 🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈 SCRIPTS -->
+	<script src="assets/js/jquery-3.6.0.js"></script>
+	<script src="assets/js/bootstrap.bundle.min.js"></script>
+	<script src="assets/js/swiper-bundle.min.js"></script>
+	<script src="assets/js/gsap.min.js"></script>
+	<script src="assets/js/ScrollTrigger.min.js"></script>
+	<script src="assets/js/sticky-sidebar.js"></script>
+	<script src="assets/js/script.js"></script>
+	<script src="assets/js/poke_script.js"></script>
+	<script src="assets/js/model-metallic.js"></script>
+	<script src="assets/js/model-pan.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+	<script src="https://unpkg.com/moralis/dist/moralis.js"></script>
+	<script src="assets/js/nft.js"></script>
+	<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+
+</body>
+
+</html>

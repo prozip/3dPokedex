@@ -1,0 +1,245 @@
+model-viewer {
+    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    /* background-image: linear-gradient(to bottom right, #5fbd58, #b763cf); */
+}
+@media screen and (max-width: 992px) {
+    model-viewer {
+        border-radius: 20px;
+        width: 100%;
+        height: 500px;
+        -o-object-fit: cover;
+        object-fit: cover;
+        /* background-image: linear-gradient(to bottom right, #5fbd58, #b763cf); */
+    }
+}
+
+.progress-bar-model {
+    display: block;
+    width: 33%;
+    height: 10%;
+    max-height: 2%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    border-radius: 25px;
+    box-shadow: 0px 3px 10px 3px rgba(0, 0, 0, 0.5),
+        0px 0px 5px 1px rgba(0, 0, 0, 0.6);
+    border: 1px solid #3c5aa6;
+    background-color: #b18f07;
+}
+
+.progress-bar-model.hide {
+    visibility: hidden;
+    transition: visibility 0.3s;
+}
+
+.update-bar-model {
+    background-color: #ffcb05;
+    width: 0%;
+    height: 100%;
+    border-radius: 25px;
+    float: left;
+    transition: width 0.3s;
+}
+
+#ar-button {
+    background-image: url(ar_icon.png);
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-position: 12px 50%;
+    background-color: #fff;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    bottom: 16px;
+    padding: 0px 16px 0px 40px;
+    font-family: Roboto Regular, Helvetica Neue, sans-serif;
+    font-size: 14px;
+    color: #4285f4;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 18px;
+    border: 1px solid #dadce0;
+}
+
+#ar-button:active {
+    background-color: #e8eaed;
+}
+
+#ar-button:focus {
+    outline: none;
+}
+
+#ar-button:focus-visible {
+    outline: 1px solid #4285f4;
+}
+
+@keyframes circle {
+    from {
+        transform: translateX(-50%) rotate(0deg) translateX(50px) rotate(0deg);
+    }
+    to {
+        transform: translateX(-50%) rotate(360deg) translateX(50px)
+            rotate(-360deg);
+    }
+}
+
+@keyframes elongate {
+    from {
+        transform: translateX(100px);
+    }
+    to {
+        transform: translateX(-100px);
+    }
+}
+
+model-viewer > #ar-prompt {
+    position: absolute;
+    left: 50%;
+    bottom: 60px;
+    animation: elongate 2s infinite ease-in-out alternate;
+    display: none;
+}
+
+model-viewer[ar-status="session-started"] > #ar-prompt {
+    display: block;
+}
+
+model-viewer > #ar-prompt > img {
+    animation: circle 4s linear infinite;
+}
+
+canvas{
+    display: block;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+body.modal-open {
+    overflow: hidden;
+}
+
+/* pokemon icon style */
+.poke-icon {
+    display: block;
+    border-radius: 100%;
+    height: 24px;
+    width: 24px;
+    padding: 4px;
+    transition: 200ms all;
+    margin-right: 5px;
+}
+.poke:hover {
+    filter: saturate(200%);
+    transform: scale(1.1);
+    cursor: pointer;
+}
+.bug {
+    background: #92bc2c;
+    box-shadow: 0 0 30px #92bc2c;
+}
+
+.dark {
+    background: #595761;
+    box-shadow: 0 0 30px #595761;
+}
+
+.dragon {
+    background: #0c69c8;
+    box-shadow: 0 0 30px #0c69c8;
+}
+
+.electric {
+    background: #f2d94e;
+    box-shadow: 0 0 30px #f2d94e;
+}
+
+.fire {
+    background: #fba54c;
+    box-shadow: 0 0 30px #fba54c;
+}
+
+.fairy {
+    background: #ee90e6;
+    box-shadow: 0 0 30px #ee90e6;
+}
+
+.fighting {
+    background: #d3425f;
+    box-shadow: 0 0 30px #d3425f;
+}
+
+.flying {
+    background: #a1bbec;
+    box-shadow: 0 0 30px #a1bbec;
+}
+
+.ghost {
+    background: #5f6dbc;
+    box-shadow: 0 0 30px #5f6dbc;
+}
+
+.grass {
+    background: #5fbd58;
+    box-shadow: 0 0 30px #5fbd58;
+}
+
+.ground {
+    background: #da7c4d;
+    box-shadow: 0 0 30px #da7c4d;
+}
+
+.ice {
+    background: #75d0c1;
+    box-shadow: 0 0 30px #75d0c1;
+}
+
+.normal {
+    background: #a0a29f;
+    box-shadow: 0 0 30px #a0a29f;
+}
+
+.poison {
+    background: #b763cf;
+    box-shadow: 0 0 30px #b763cf;
+}
+
+.psychic {
+    background: #fa8581;
+    box-shadow: 0 0 30px #fa8581;
+}
+
+.rock {
+    background: #c9bb8a;
+    box-shadow: 0 0 30px #c9bb8a;
+}
+
+.steel {
+    background: #5695a3;
+    box-shadow: 0 0 30px #5695a3;
+}
+
+.water {
+    background: #539ddf;
+    box-shadow: 0 0 30px #539ddf;
+}
+/* end pokemon icon style */
+
+.stat {
+    margin-left: 1rem;
+    border: 1px solid #c0c0c0;
+    width: fit-content;
+    margin-bottom: 1rem;
+}
+
+
+.first-uppercase::first-letter{
+  text-transform:capitalize;
+}
+
+

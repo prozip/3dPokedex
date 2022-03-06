@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="title" content="Pokedex 3D" />
+	<meta name="description" content="3D-Animated Pokedex" />
+	<meta name="robots" content="index, follow" />
+	<meta name="language" content="English" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title> pokedex </title>
+	<meta name="msapplication-TileColor" content="#da532c" />
+	<meta name="theme-color" content="#ffffff" />
+	<!-- 🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈 STYLES -->
+	<link rel="stylesheet" href="assets/css/plugins/remixicon.css" />
+	<link rel="stylesheet" href="assets/css/plugins/bootstrap.min.css" />
+	<link rel="stylesheet" href="assets/css/plugins/swiper-bundle.min.css" />
+	<link rel="stylesheet" href="assets/css/style.css" />
+	<link rel="stylesheet" href="assets/css/model_style.css" />
+
+</head>
+
+<body class="body">
+	<div class="overflow-hidden">
+		<header class="header__1 js-header">
+			<div class="container">
+				<div class="wrapper js-header-wrapper space-x-10">
+					<div class="header__logo">
+						<a href="/">
+							<img class="header__logo" id="logo_js" src="assets/img/logos/logo.png" alt="logo" />
+						</a>
+					</div>
+					<!-- ==================  -->
+					<div class="header__menu">
+						<ul class="d-flex space-x-20">
+							<li> <a class="color_black" href="/"> Pokedex</a> </li>
+							<li> <a class="color_black" href="gigantamax.html"> Gigantamax</a> </li>
+							<li> <a class="color_black" href="mega-evo.html"> Mega Evo</a> </li>
+							<li> <a class="color_black" href=""> Blog</a> </li>
+						</ul>
+					</div>
+					<!-- ================== -->
+					<div class="header__search">
+						<form onsubmit="search(event, document.getElementById('search_input').value)">
+							<input type="text" placeholder="Search name/id" id="search_input"/>
+							<button class="header__result">
+								<i class="ri-search-line"></i>
+							</button>
+						</form>
+					</div>
+					<div class="d-flex align-items-center space-x-20">
+						<div class="header__avatar">
+							<div class="price">
+								<span>??? <strong>Pokemons</strong> </span>
+							</div>
+							<img class="avatar" src="assets/img/logos/pokeball-icon.png" alt="avatar" />
+						</div>
+						<div class="mode_switcher space-x-10">
+							<a href="#" class="light d-flex align-items-center is_active">
+								<i class="ri-sun-fill"></i> Light
+							</a>
+							<div class="bg-dark py-10" style="padding: 0px 0px; border-radius: 20px;">
+								<a href="#" class="dark d-flex align-items-center">
+									<i class="ri-moon-fill"></i> Dark
+								</a>
+							</div>
+						</div>
+						<div class="header__burger js-header-burger"></div>
+					</div>
+					<div class="header__mobile js-header-mobile">
+						<div class="header__mobile__menu space-y-40">
+							<ul class="d-flex space-y-20">
+								<li> <a class="color_black" href="/"> Pokedex</a> </li>
+								<li> <a class="color_black" href="gigatamax.html"> Gigantamax</a> </li>
+								<li> <a class="color_black" href="meta-evo.html"> Mega Evo</a> </li>
+								<li> <a class="color_black" href=""> Blog</a> </li>
+							</ul>
+							<div class="space-y-20">
+								<div class="header__search in_mobile w-full">
+									<form onsubmit="search(event, document.getElementById('search_input_mobile').value)">
+										<input type="text" placeholder="Search name/id" id="search_input_mobile" />
+										<button class="header__result">
+											<i class="ri-search-line"></i>
+										</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<div class="hero_ranking bg_white">
+			<div class="container">
+				<h1 class="text-center">Mega Evolution</h1>
+			</div>
+		</div>
+
+		<section class="section ranking mt-100">
+			<div class="container">
+				<div class="box d-flex table-responsive">
+					<table class="table ranking mobile-table">
+						<thead>
+							<tr>
+								<th scope="col" class="pl-1"><span>Model Collection</span></th>
+								<th scope="col"><span>DexNo</span></th>
+								<th scope="col" class="text-center"><span>Type 1</span></th>
+								<th scope="col" class="text-center"><span>Type 1</span></th>
+								<th scope="col" style="padding-right: 0;"><span>HP</span></th>
+								<th scope="col" style="padding-right: 0;"><span>Atk</span></th>
+								<th scope="col" style="padding-right: 0;"><span>Def</span></th>
+								<th scope="col" style="padding-right: 0;"><span>SpA</span></th>
+								<th scope="col" style="padding-right: 0;"><span>SpD</span></th>
+								<th scope="col" style="padding-right: 0;"><span>Spd</span></th>
+							</tr>
+						</thead>
+						<tbody id="table-data">
+						</tbody>
+					</table>
+				</div>
+				<div id="load-detect"></div>
+			</div>
+		</section>
+		
+		<footer class="footer__1">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6 space-y-20">
+						<div class="footer__logo">
+							<a href="/">
+								<img width="45%" src="assets/img/logos/logo.png" alt="logo" id="logo_js_f">
+							</a>
+						</div>
+						<p class="footer__text">
+							3D-Animated Pokédex on the web
+						</p>
+						<div>
+							<ul class="footer__social space-x-10 mb-40">
+								<li> <a href="https://github.com/prozip" target="__blank"> <i class="ri-github-line"></i> </a>
+								</li>
+								<li> <a data-bs-toggle="tooltip" data-bs-placement="top" title="ZeroCracK#3962"> <i
+											class="ri-discord-line"></i> </a>
+								</li>
+								<li> <a  target="__blank"> <i class="ri-whatsapp-line"></i> </a>
+								</li>
+								<li> <a href="https://www.reddit.com/user/prozip_" target="__blank"> <i class="ri-reddit-line" ></i> </a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-2 col-6">
+						<h6 class="footer__title">Pokedex 3D</h6>
+						<ul class="footer__list">
+							<li> <a href="/"> Pokedex </a>
+							</li>
+							<li> <a href="gigantamax.html"> Gigantamax
+								</a> </li>
+							<li> <a href="mega-evo.html"> Mega Evo</a> </li>
+						</ul>
+					</div>
+					<div class="col-lg-2 col-6">
+						<h6 class="footer__title">Credits</h6>
+						<ul class="footer__list">
+							<li> <a href="https://pokeapi.co/" target="__blank"> PokeApi</a>
+							</li>
+							<li> <a href="https://www.blender.org/" target="__blank"> Blender</a>
+							</li>
+							<li> <a href="https://getbootstrap.com/" target="__blank"> Bootstrap</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-lg-2 col-6">
+						<h6 class="footer__title">About me</h6>
+						<ul class="footer__list">
+							<li> <a href="https://github.com/prozip" target="__blank"> Github </a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<p class="copyright text-center">
+					© 2022. Made by prozip. 
+					<img src="assets/img/icons/vietnam-flag-icon.png" width="18px" style="margin-bottom: 4px;">
+
+				</p>
+			</div>
+		</footer>
+	</div>
+	<!-- 🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈 SCRIPTS -->
+	<script src="assets/js/jquery-3.6.0.js"></script>
+	<script src="assets/js/bootstrap.bundle.min.js"></script>
+	<script src="assets/js/swiper-bundle.min.js"></script>
+	<script src="assets/js/gsap.min.js"></script>
+	<script src="assets/js/ScrollTrigger.min.js"></script>
+	<script src="assets/js/sticky-sidebar.js"></script>
+	<script src="assets/js/script.js"></script>
+	<script src="assets/js/sp-form.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+	<script src="https://unpkg.com/moralis/dist/moralis.js"></script>
+	<script src="assets/js/nft.js"></script>
+
+</body>
+
+</html>
