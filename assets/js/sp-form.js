@@ -15,7 +15,7 @@ function search(e, value) {
 window.onload = function () {
     var path = document.querySelector('base').href + 'data/Gigantamax/index.json'
     var form = "Gigantamax "
-    if (window.location.pathname == document.querySelector('base').href +  "/mega-evo.html") {
+    if (window.location.pathname.includes("mega-evo.html")) {
         path = document.querySelector('base').href + 'data/Mega/index.json'
         form = "Mega "
     }
