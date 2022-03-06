@@ -9,14 +9,14 @@ function search(e, value) {
         value = parseInt(value)
     }
     value = value.toString()
-    window.location.href =document.querySelector('base').href + 'poke-detail.html?id=' + (value.toLowerCase())
+    window.location.href = document.querySelector('base').href + 'poke-detail.html?id=' + (value.toLowerCase())
 }
 
 window.onload = function () {
-    var path = '/data/Gigantamax/index.json'
+    var path = document.querySelector('base').href + 'data/Gigantamax/index.json'
     var form = "Gigantamax "
-    if (window.location.pathname == "/mega-evo.html") {
-        path = '/data/Mega/index.json'
+    if (document.querySelector('base').href + window.location.pathname == "/mega-evo.html") {
+        path = document.querySelector('base').href + 'data/Mega/index.json'
         form = "Mega "
     }
     fetch(path)
@@ -41,7 +41,7 @@ window.onload = function () {
                         }
                         obj.name = res
                         var htmlcode = `
-                        <tr class="table-tr" onclick="window.location.href = 'poke-detail.html?id=${obj.id}'">
+                        <tr class="table-tr" onclick="window.location.href = document.querySelector('base').href +'poke-detail.html?id=${obj.id}'">
                             <td>
                                 <div class="collection space-x-10">
                                     <div class="media">

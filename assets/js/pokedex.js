@@ -89,7 +89,7 @@ function fetchPoke(data) {
 }
 
 window.onload = function () {
-    fetch('/data/index.json')
+    fetch(document.querySelector('base').href + 'data/index.json')
         .then(response => response.json())
         .then(data => {
             index_json = data
