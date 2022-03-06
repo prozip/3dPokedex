@@ -18,7 +18,7 @@ function search(e, value) {
         value = parseInt(value)
     }
     value = value.toString()
-    window.location.href = window.location.origin + '/poke-detail.html?id=' + (value.toLowerCase())
+    window.location.href = document.querySelector('base').href + 'poke-detail.html?id=' + (value.toLowerCase())
 }
 
 function fetchPoke(data) {
@@ -93,8 +93,6 @@ window.onload = function () {
         .then(response => response.json())
         .then(data => {
             index_json = data
-            fetchPoke(data).then((msg)=>{
-                console.log("done");
-            })
+            fetchPoke(data)
         });
 }
